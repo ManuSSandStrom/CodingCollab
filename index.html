@@ -3,161 +3,204 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Mounika L - Frontend Developer Portfolio</title>
+    <title>Coding Collaboration Platform</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="logo">Mounika.L</div>
-        <ul class="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#education">Education</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-        <div class="menu-toggle">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-    </nav>
+    <!-- Main Container -->
+    <div id="app">
+        <!-- Header -->
+        <header>
+            <nav>
+                <div class="logo">Discode</div>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#rooms">Rooms</a></li>
+                    <li><a href="#profile">Profile</a></li>
+                    <li><button id="login-btn">Login</button></li>
+                    <li><button id="logout-btn" style="display: none;">Logout</button></li>
+                </ul>
+            </nav>
+        </header>
 
-    <!-- Home Section -->
-    <section id="home" class="section home">
-        <div class="home-content">
-            <h1>Hi, I'm Mounika.L</h1>
-            <h2>Frontend Developer</h2>
-            <p>Building responsive and user-friendly web experiences with passion and precision.</p>
-            <a href="#contact" class="btn">Get in Touch</a>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="section about">
-        <h2>About Me</h2>
-        <div class="about-content">
-            <img src="https://res.cloudinary.com/dcd6l5egh/image/upload/w_1000,c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1744639411/pic_pp1hlg.jpg" alt="Mounika.L" class="about-img">
-            <div class="about-text">
-                <p>I'm a dedicated Frontend Developer with a knack for creating seamless and visually appealing web interfaces. My expertise lies in HTML, CSS, JavaScript, and modern frameworks like React. I love transforming ideas into interactive digital experiences.</p>
-                <p>When I'm not coding, you can find me exploring new design trends or sipping coffee while brainstorming creative solutions.</p>
-                <a href="resume.pdf" class="btn" download>Download Resume</a>
+        <!-- Authentication Section -->
+        <section id="auth-section" style="display: none;">
+            <div class="auth-container">
+                <h2>Login / Register</h2>
+                <form id="auth-form">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" required>
+                    </div>
+                    <button type="submit" id="auth-submit">Login</button>
+                    <button type="button" id="google-auth">Sign in with Google</button>
+                </form>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Skills Section -->
-    <section id="skills" class="section skills">
-        <h2>My Skills</h2>
-        <div class="skills-grid">
-            <div class="skill-card">HTML5</div>
-            <div class="skill-card">CSS</div>
-            <div class="skill-card">JavaScript</div>
-            <div class="skill-card">React</div>
-            <div class="skill-card">Git</div>
-            <div class="skill-card">Responsive Design</div>
-        </div>
-    </section>
+        <!-- Home Section -->
+        <section id="home-section">
+            <h1>Welcome to Discode</h1>
+            <p>Join or create coding rooms to collaborate in real-time!</p>
+            <button id="create-room-btn">Create Room</button>
+            <button id="join-room-btn">Join Room</button>
+        </section>
 
-    <!-- Projects Section -->
-    <section id="projects" class="section projects">
-        <h2>My Projects</h2>
-        <div class="projects-grid">
-            <div class="project-card">
-                <img src="https://via.placeholder.com/400x250" alt="Project 1">
-                <div class="project-info">
-                    <h3>Portfolio Website</h3>
-                    <p>A personal portfolio showcasing my skills and projects with a modern design.</p>
-                    <div class="project-links">
-                        <a href="https://github.com/yourusername/portfolio" target="_blank" class="btn">GitHub</a>
-                        <a href="https://your-live-demo.com" target="_blank" class="btn">Live Demo</a>
+        <!-- Room Creation Section -->
+        <section id="create-room-section" style="display: none;">
+            <h2>Create a New Room</h2>
+            <form id="create-room-form">
+                <div class="form-group">
+                    <label for="room-name">Room Name</label>
+                    <input type="text" id="room-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="room-type">Room Type</label>
+                    <select id="room-type">
+                        <option value="public">Public</option>
+                        <option value="private">Private</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="room-password" id="room-password-label" style="display: none;">Room Password</label>
+                    <input type="password" id="room-password" style="display: none;">
+                </div>
+                <button type="submit">Create Room</button>
+            </form>
+        </section>
+
+        <!-- Room List Section -->
+        <section id="rooms-section" style="display: none;">
+            <h2>Available Rooms</h2>
+            <div id="room-list">
+                <!-- Dynamically populated -->
+            </div>
+        </section>
+
+        <!-- Room Interface -->
+        <section id="room-section" style="display: none;">
+            <div class="room-container">
+                <!-- Host Controls -->
+                <div id="host-controls" style="display: none;">
+                    <h3>Host Controls</h3>
+                    <button id="start-session">Start Session</button>
+                    <button id="end-session">End Session</button>
+                    <button id="toggle-video">Toggle Video</button>
+                    <button id="toggle-chat">Toggle Chat</button>
+                    <button id="record-session">Record Session</button>
+                    <button id="schedule-session">Schedule Session</button>
+                </div>
+
+                <!-- Main Content Area -->
+                <div class="main-content">
+                    <!-- Screen Sharing Area -->
+                    <div class="screen-sharing">
+                        <div id="host-screen">
+                            <video id="host-video" autoplay muted></video>
+                        </div>
+                        <div id="additional-screens">
+                            <!-- Additional screens added dynamically -->
+                        </div>
+                    </div>
+
+                    <!-- Code Editor -->
+                    <div class="code-editor-container">
+                        <h3>Code Editor</h3>
+                        <div id="code-editor">
+                            <!-- Monaco/Ace editor placeholder -->
+                            <textarea id="editor" readonly></textarea>
+                        </div>
+                        <div class="editor-controls">
+                            <button id="run-code">Run Code</button>
+                            <button id="submit-code">Submit Code</button>
+                        </div>
+                    </div>
+
+                    <!-- Whiteboard -->
+                    <div class="whiteboard-container">
+                        <h3>Whiteboard</h3>
+                        <canvas id="whiteboard"></canvas>
                     </div>
                 </div>
-            </div>
-            <div class="project-card">
-                <img src="https://via.placeholder.com/400x250" alt="Project 2">
-                <div class="project-info">
-                    <h3>E-Commerce App</h3>
-                    <p>A responsive e-commerce platform built with React and CSS Grid.</p>
-                    <div class="project-links">
-                        <a href="https://github.com/yourusername/ecommerce" target="_blank" class="btn">GitHub</a>
-                        <a href="https://your-live-demo.com" target="_blank" class="btn">Live Demo</a>
+
+                <!-- Sidebar -->
+                <aside class="sidebar">
+                    <!-- Video Feeds -->
+                    <div class="video-feeds">
+                        <h3>Participants</h3>
+                        <div id="participant-videos">
+                            <!-- Participant video feeds -->
+                        </div>
+                        <div class="video-controls">
+                            <button id="toggle-mic">Toggle Mic</button>
+                            <button id="toggle-cam">Toggle Camera</button>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="project-card">
-                <img src="https://via.placeholder.com/400x250" alt="Project 3">
-                <div class="project-info">
-                    <h3>Task Manager</h3>
-                    <p>A productivity app to manage tasks with a clean UI and local storage.</p>
-                    <div class="project-links">
-                        <a href="https://github.com/yourusername/task-manager" target="_blank" class="btn">GitHub</a>
-                        <a href="https://your-live-demo.com" target="_blank" class="btn">Live Demo</a>
+
+                    <!-- Chat -->
+                    <div class="chat-container">
+                        <h3>Chat</h3>
+                        <div id="chat-messages">
+                            <!-- Chat messages populated dynamically -->
+                        </div>
+                        <div class="chat-input">
+                            <textarea id="chat-input" placeholder="Type a message..."></textarea>
+                            <button id="send-message">Send</button>
+                        </div>
+                        <div class="private-chat">
+                            <button id="private-message-btn">Private Message</button>
+                        </div>
                     </div>
-                </div>
+
+                    <!-- Participant Management -->
+                    <div id="participant-management" style="display: none;">
+                        <h3>Manage Participants</h3>
+                        <ul id="participant-list">
+                            <!-- Populated dynamically -->
+                        </ul>
+                    </div>
+                </aside>
+            </div>
+        </section>
+
+        <!-- Code Review Modal -->
+        <div id="code-review-modal" style="display: none;">
+            <div class="modal-content">
+                <h3>Code Review</h3>
+                <div id="submitted-code"></div>
+                <textarea id="feedback-input" placeholder="Provide feedback..."></textarea>
+                <button id="submit-feedback">Submit Feedback</button>
+                <button id="close-modal">Close</button>
             </div>
         </div>
-    </section>
 
-    <!-- Education Section -->
-    <section id="education" class="section education">
-        <h2>Education</h2>
-        <div class="education-content">
-            <div class="education-item">
-                <h3>Bachelor of Technology in Computer Science</h3>
-                <p>XYZ University | 2018 - 2022</p>
-                <p>Graduated with a focus on web development and software engineering.</p>
-            </div>
-            <div class="education-item">
-                <h3>Bachelor of Technology in Computer Science</h3>
-                <p>XYZ University | 2018 - 2022</p>
-                <p>Graduated with a focus on web development and software engineering.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Experience Section -->
-    <section id="experience" class="section experience">
-        <h2>Experience</h2>
-        <div class="experience-content">
-            <div class="experience-item">
-                <h3>Frontend Developer Intern</h3>
-                <p>ABC Tech Solutions | June 2021 - December 2021</p>
-                <p>Developed responsive web interfaces using React and collaborated with designers to enhance UX.</p>
-            </div>
-            <div class="experience-item">
-                <h3>Junior Frontend Developer</h3>
-                <p>XYZ Innovations | January 2022 - Present</p>
-                <p>Building scalable web applications and optimizing performance with modern JavaScript frameworks.</p>
+        <!-- Schedule Session Modal -->
+        <div id="schedule-modal" style="display: none;">
+            <div class="modal-content">
+                <h3>Schedule Session</h3>
+                <form id="schedule-form">
+                    <div class="form-group">
+                        <label for="session-date">Date</label>
+                        <input type="date" id="session-date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="session-time">Time</label>
+                        <input type="time" id="session-time" required>
+                    </div>
+                    <button type="submit">Schedule</button>
+                    <button type="button" id="close-schedule">Cancel</button>
+                </form>
             </div>
         </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="section contact">
-        <h2>Contact Me</h2>
-        <form id="contact-form" class="contact-form">
-            <input type="text" name="name" placeholder="Your Name" required>
-            <input type="email" name="email" placeholder="Your Email" required>
-            <textarea name="message" placeholder="Your Message" required></textarea>
-            <button type="submit" class="btn">Send Message</button>
-        </form>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <p>&copy; 2025 L. Mounika. All Rights Reserved.</p>
-        <div class="social-links">
-            <a href="" target="_blank">LinkedIn</a>
-            <a href="" target="_blank">GitHub</a>
-            <a href="" target="_blank">Twitter</a>
-        </div>
-    </footer>
-
+    </div>
     <script src="script.js"></script>
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Discode. All rights reserved.</p>
+    </footer>
 </body>
 </html>
